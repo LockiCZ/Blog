@@ -1,0 +1,85 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="card-title display-4">{{ post.title }}</h1>
+                
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    {% if post.published_date %}
+                        <div class="text-muted">
+                            <i class="fas fa-calendar-alt me-1"></i> Published: {{ post.published_date|date:"F d, Y" }}
+                        </div>
+                    {% else %}
+                        <span class="badge bg-warning text-dark"><i class="fas fa-pencil-alt me-1"></i> Draft</span>
+                        <a class="btn btn-success" href="{% url 'post_publish' pk=post.pk %}">
+                            <i class="fas fa-check-circle"></i> Publish
+                        </a>
+                    {% endif %}
+                    
+                    <div>
+                        {% if user.is_authenticated %}
+                            <a class="btn btn-outline-primary" href="{% url 'post_edit' pk=post.pk %}">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a class="btn btn-outline-danger" href="{% url 'post_remove' pk=post.pk %}">
+                                <i class="fas fa-trash-alt"></i> Remove
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="post-content my-4">
+                    {{ post.text|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3><i class="fas fa-comments me-2"></i>Comments</h3>
+            <a class="btn btn-primary" href="{% url 'add_comment_to_post' pk=post.pk %}">
+                <i class="fas fa-plus-circle me-1"></i> Add Comment
+            </a>
+        </div>
+        
+        {% for comment in post.comments.all %}
+            <div class="card mb-3 {% if not comment.approved_comment %}border-warning{% endif %}">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5 class="card-title mb-0">{{ comment.author }}</h5>
+                        <small class="text-muted">{{ comment.created_date|date:"F d, Y" }}</small>
+                    </div>
+                    
+                    {% if not comment.approved_comment and user.is_authenticated %}
+                        <div class="alert alert-warning mb-3">
+                            <span><i class="fas fa-exclamation-circle"></i> This comment is awaiting approval</span>
+                            <div class="mt-2">
+                                <a class="btn btn-sm btn-success" href="{% url 'comment_approve' pk=comment.pk %}">
+                                    <i class="fas fa-check"></i> Approve
+                                </a>
+                                <a class="btn btn-sm btn-danger" href="{% url 'comment_remove' pk=comment.pk %}">
+                                    <i class="fas fa-times"></i> Remove
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-text">{{ comment.text|safe }}</div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="alert alert-secondary text-center">
+                <p class="mb-0"><i class="fas fa-comment-slash me-2"></i>No comments posted yet. Be the first to comment!</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
