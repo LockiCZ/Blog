@@ -21,17 +21,29 @@ from django.utils import timezone
 # Create your views here.
 
 
-class AboutView(TemplateView):
-    template_name = 'blog/about.html'
-
-class PostListView(ListView):
+class HomeListView(ListView):
+    template_name = 'blog/home.html'
     model = Post
 
     def get_queryset(self):
         return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
+
+class AboutView(TemplateView):
+    template_name = 'blog/about.html'
+
+
+class PostListView(ListView):
+    model = Post
+    template_name = 'blog/post_list.html'
+
+    def get_queryset(self):
+        return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+
+
 class PostDetailView(DetailView):
     model = Post
+
 
 class CreatePostView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
@@ -40,6 +52,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     form_class = PostForm
     model = Post
     
+
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
@@ -79,17 +92,20 @@ def add_comment_to_post(request, pk):
         form = CommentForm()
     return render(request, 'blog/comment_form.html', {'form': form})
 
+
 @login_required
 def comment_approve(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
     return redirect('post_detail', pk=comment.post.pk)
 
+
 def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     post_pk = comment.post.pk
     comment.delete()
     return redirect('post_detail', pk=post_pk)
+
 
 @login_required
 def post_publish(request, pk):

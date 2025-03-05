@@ -1,0 +1,55 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<section class="container p-5 text-center text-sm-start align-items-center justify-content-between light-bg ">
+    <div>
+        <h1>Process automatization with AI</h1>
+        
+        <p class="lead my-4">
+            Use AI to do repetitive work and focus on thinks that matters most
+        </p>
+        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#enroll">
+            Request a quote
+        </button>
+    </div>
+</section>
+
+<section class="container my-4 ultra-light-bg">
+
+    <h1 class="pt-3 text-center">Blog Posts</h1>
+    
+    <div class="row">
+        {% for post in post_list %}
+            <div class="col-md-6 col-lg-4 post-list-item">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ post.title }}</h3>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="text-muted">
+                                <i class="fas fa-calendar-alt me-1"></i> {{ post.published_date|date:"F d, Y" }}
+                            </div>
+                        </div>
+                        <div class="card-text post-preview-content">
+                            {{ post.text|safe|truncatewords_html:30 }}
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-primary">
+                            <i class="fas fa-book-open me-1"></i> Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-center">
+                <div class="alert alert-secondary">
+                    <i class="fas fa-file-alt me-2"></i> No posts yet. Stay tuned!
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+{% endblock %}

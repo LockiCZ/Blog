@@ -2,40 +2,36 @@
 
 {% block content %}
 
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h1 class="card-title display-4">{{ post.title }}</h1>
-                
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    {% if post.published_date %}
-                        <div class="text-muted">
-                            <i class="fas fa-calendar-alt me-1"></i> Published: {{ post.published_date|date:"F d, Y" }}
-                        </div>
-                    {% else %}
-                        <span class="badge bg-warning text-dark"><i class="fas fa-pencil-alt me-1"></i> Draft</span>
-                        <a class="btn btn-success" href="{% url 'post_publish' pk=post.pk %}">
-                            <i class="fas fa-check-circle"></i> Publish
-                        </a>
-                    {% endif %}
-                    
-                    <div>
-                        {% if user.is_authenticated %}
-                            <a class="btn btn-outline-primary" href="{% url 'post_edit' pk=post.pk %}">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a class="btn btn-outline-danger" href="{% url 'post_remove' pk=post.pk %}">
-                                <i class="fas fa-trash-alt"></i> Remove
-                            </a>
-                        {% endif %}
-                    </div>
+<div class="row mb-4 justify-content-center">
+    <div class="col-lg-6 p-4 rounded-4 rounded">
+        <h1 class="h1">{{ post.title }}</h1>
+        
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            {% if post.published_date %}
+                <div class="text-muted">
+                    <i class="fas fa-calendar-alt me-1"></i> Published: {{ post.published_date|date:"F d, Y" }}
                 </div>
-                
-                <div class="post-content my-4">
-                    {{ post.text|safe }}
-                </div>
+            {% else %}
+                <span class="badge bg-warning text-dark"><i class="fas fa-pencil-alt me-1"></i> Draft</span>
+                <a class="btn btn-success" href="{% url 'post_publish' pk=post.pk %}">
+                    <i class="fas fa-check-circle"></i> Publish
+                </a>
+            {% endif %}
+            
+            <div>
+                {% if user.is_authenticated %}
+                    <a class="btn btn-outline-primary" href="{% url 'post_edit' pk=post.pk %}">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a class="btn btn-outline-danger" href="{% url 'post_remove' pk=post.pk %}">
+                        <i class="fas fa-trash-alt"></i> Remove
+                    </a>
+                {% endif %}
             </div>
+        </div>
+        
+        <div class="post-content my-4">
+            {{ post.text|safe }}
         </div>
     </div>
 </div>
