@@ -282,8 +282,6 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
 /* Modern Content Container */
 .content-container {
   min-height: calc(100vh - 180px);
-  padding: 4rem 0;
-  position: relative;
 }
 
 /* Contemporary Card Design */

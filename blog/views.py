@@ -21,7 +21,7 @@ from django.utils import timezone
 # Create your views here.
 
 
-class HomeListView(ListView):
+class HomeView(ListView):
     template_name = 'blog/home.html'
     model = Post
 
@@ -33,9 +33,9 @@ class AboutView(TemplateView):
     template_name = 'blog/about.html'
 
 
-class PostListView(ListView):
+class BlogView(ListView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/blog.html'
 
     def get_queryset(self):
         return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
