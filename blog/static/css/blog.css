@@ -172,7 +172,6 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
 }
 
 .btn:hover {
-  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
 
@@ -217,7 +216,7 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
 
 .navbar-brand {
   font-family: var(--font-heading);
-  font-size: 2.2rem;
+  font-size: 1.5rem;
   color: var(--primary) !important;
   font-weight: 700;
   position: relative;
@@ -283,8 +282,6 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
 /* Modern Content Container */
 .content-container {
   min-height: calc(100vh - 180px);
-  padding: 4rem 0;
-  position: relative;
 }
 
 /* Contemporary Card Design */
@@ -662,7 +659,7 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
 }
 
 .card, .post-preview, .comment-card {
-  animation: fadeInUp 0.6s ease backwards;
+  animation: fadeInUp 0.5s ease backwards;
 }
 
 .card:nth-child(2n) {
@@ -740,7 +737,7 @@ textarea.form-control {
 /* Responsive Refinements */
 @media (max-width: 992px) {
   .navbar-brand {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
   
   .card-body {
@@ -800,4 +797,25 @@ textarea.form-control {
 .blur-bg {
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+.light-bg {
+  border-radius: var(--border-radius-md);
+  background: var(--light);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-medium);
+}
+
+.dark-bg {
+  border-radius: var(--border-radius-md);
+  background: var(--dark);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-medium);
+}
+
+.ultra-light-bg {
+  border-radius: var(--border-radius-md);
+  background: var(--ultra-light);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-medium);
 }

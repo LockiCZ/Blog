@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<section class="container p-5 text-center text-sm-start align-items-center justify-content-between light-bg ">
+    <div>
+        <h1>{{ request.locals.lead.header }}</h1>
+        
+        <p class="lead my-4">
+            {{ request.locals.lead.text }}
+        </p>
+        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#enroll">
+            {{ request.locals.lead.button }}
+        </button>
+    </div>
+</section>
+
+<section class="container my-4 ultra-light-bg pt-1">
+    {% include 'blog/post_list.html' %}
+</section>
+
+
+{% endblock %}
