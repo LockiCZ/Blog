@@ -22,7 +22,7 @@ def load_translations():
     if os.getenv("TRANSLATIONS_DIR"):
         base_dir = os.getenv("TRANSLATIONS_DIR")
     else:
-        base_dir = os.path.join(os.curdir, "data", "locals")
+        base_dir = os.path.join(os.path.dirname(__file__), "..", "..", "data", "locals")
 
     out = dict()
     for dir_name in os.listdir(base_dir):

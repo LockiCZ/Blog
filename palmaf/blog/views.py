@@ -11,8 +11,8 @@ from django.views.generic import (
     DeleteView
     )
 
-from blog.models import Post, Comment
-from blog.forms import PostForm, CommentForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 from django.urls import reverse_lazy
 from django.utils import timezone

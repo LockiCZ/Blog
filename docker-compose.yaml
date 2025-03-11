@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  palmaf:
+    build:
+      context: .
+      dockerfile: Dockerfile 
+    networks:
+      - entrypoint
+    ports:
+      - 8000:8000
+    volumes:
+      - ./data:/app/data
+    restart: always
+
+networks:
+  entrypoint:
+    name: entrypoint
+    external: true
