@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import (
     TemplateView, 
     ListView, 
@@ -45,25 +45,31 @@ class PostDetailView(DetailView):
     model = Post
 
 
-class CreatePostView(LoginRequiredMixin, CreateView):
+class CreatePostView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
+    permission_required = "blog.add_post"
 
     form_class = PostForm
     model = Post
     
 
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
+    permission_required = "blog.change_post"
+
+    permission_denied_message = "You do not have the required permissions!"
+    raise_exception = False  # Raise 403 error instead of redirecting
 
     form_class = PostForm
     model = Post
 
 
-class PostDeleteView(LoginRequiredMixin, DeleteView):
+class PostDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('post_list')
+    permission_required = "blog.delete_post"
 
 
 class DraftListView(LoginRequiredMixin, ListView):

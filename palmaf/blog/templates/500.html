@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<section class="container p-5 text-center text-sm-start align-items-center justify-content-between light-bg ">
+    <div>
+        <h1>500 - {{ request.locals.status_code.SC_500 }}</h1>
+        
+        <p class="lead my-4">
+            {{ exception }}
+        </p>
+    </div>
+</section>
+
+{% endblock %}

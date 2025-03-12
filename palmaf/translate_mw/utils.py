@@ -4,6 +4,7 @@ import json
 
 def load_language(lang, dir_name):
     out = dict()
+    globals = None
     for root, _, files in os.walk(dir_name):
         for file_name in files:
             if file_name.endswith(".json"):
@@ -11,10 +12,20 @@ def load_language(lang, dir_name):
                 with open(file_path, "r", encoding="utf-8") as f:
                     lang_data = json.load(f)
                     lang_data["lang"] = lang
-                    out["/" + file_name[:-len(".json")]] = lang_data
                     
-    if "/index" in out:
-        out["/"] = out["/index"]
+                    if file_name == ".globals.json":
+                        globals = lang_data
+                        out["."] = globals
+                        continue
+
+                    out["/" + file_name[:-len(".json")] + "/"] = lang_data
+    if globals:
+        for value in out.values():
+            value.update(globals)
+    else:
+        out["."] = dict()
+    if "/index/" in out:
+        out["/"] = out["/index/"]
     return out
 
 
@@ -39,4 +50,3 @@ def get_lang_id(request):
         return request.META["HTTP_ACCEPT_LANGUAGE"][:2]
     
     return "en"
-

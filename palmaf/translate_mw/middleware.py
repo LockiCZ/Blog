@@ -12,9 +12,16 @@ class TranslationMiddleware:
     def get_lang_data(self, request):
         lang = get_lang_id(request)
 
-        if lang in self.translations and request.path in self.translations[lang]:    
-            return self.translations[lang][request.path]
-        return None
+        if lang in self.translations:
+            if request.path in self.translations[lang]:    
+                return self.translations[lang][request.path]
+            else:
+                return self.translations[lang]["."]
+        else:
+            if request.path in self.translations["en"]:    
+                return self.translations["en"][request.path]
+            else:
+                return self.translations["en"]["."]
 
     def __call__(self, request):
         request.locals = SimpleLazyObject(lambda: self.get_lang_data(request))

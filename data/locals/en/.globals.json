@@ -1,0 +1,11 @@
+{
+    "read_more": "Read more",
+    "status_code": {
+        "SC_200": "Success",
+        "SC_400": "Bad request",
+        "SC_401": "Unauthorized",
+        "SC_403": "Permission required",
+        "SC_404": "Not found",
+        "SC_500": "Internal server error"
+    }
+}
