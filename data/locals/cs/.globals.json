@@ -1,0 +1,17 @@
+{
+    "read_more": "Číst dále",
+    "status_code": {
+        "SC_200": "Úspěch",
+        "SC_400": "Špatný požadavek",
+        "SC_401": "Neautorizováno",
+        "SC_403": "Vyžadováno oprávnění",
+        "SC_404": "Nenalezeno",
+        "SC_500": "Interní chyba serveru"
+    },
+    "nav": {
+        "services": "Služby",
+        "blog": "Blog",
+        "faq": "FAQ",
+        "contact": "Kontakt"
+    }
+}

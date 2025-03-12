@@ -7,5 +7,11 @@
         "SC_403": "Permission required",
         "SC_404": "Not found",
         "SC_500": "Internal server error"
+    },
+    "nav": {
+        "services": "Services",
+        "blog": "Blog",
+        "faq": "FAQ",
+        "contact": "Contact"
     }
 }

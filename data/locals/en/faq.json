@@ -1,0 +1,18 @@
+{
+    "header": "Frequently Asked Questions",
+    "new_question_btn": "Ask a new question",
+    "questions": [
+        {
+            "question": "What is the purpose of this website?",
+            "answer": "This website is a platform for the community to ask questions and get answers from the community. It is a place to share knowledge and learn from each other."
+        },
+        {
+            "question": "How do I ask a question?",
+            "answer": "To ask a question, click on the 'Ask a new question' button and fill out the form. Once you submit your question, it will be reviewed by the community and posted on the website."
+        },
+        {
+            "question": "How do I answer a question?",
+            "answer": "To answer a question, click on the 'Answer' button below the question and fill out the form. Once you submit your answer, it will be reviewed by the community and posted on the website."
+        }
+    ]
+}

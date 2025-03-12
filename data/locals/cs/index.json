@@ -1,3 +1,11 @@
 {
-    
+    "lead": {
+        "header": "Automatizace procesů s pomocí AI",
+        "text": "Pomáháme firmám automatizovat jejich procesy s pomocí AI, snižujeme náklady a zvyšujeme efektivitu. Využijte AI k tomu, aby dělala opakující se práci a zaměřte se na to, co je pro vás nejdůležitější.",
+        "button": "Kontaktujte nás"
+    },
+    "blog_posts": "Články",
+    "new_post": "Nový článek",
+    "drafts": "Koncepty",
+    "no_post_msg": "Zatím žádné články. Zůstaňte naladěni!"
 }

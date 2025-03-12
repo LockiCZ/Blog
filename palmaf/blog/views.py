@@ -28,9 +28,16 @@ class HomeView(ListView):
     def get_queryset(self):
         return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
+class ServicesView(TemplateView):
+    template_name = 'blog/services.html'
 
-class AboutView(TemplateView):
-    template_name = 'blog/about.html'
+
+class ContactView(TemplateView):
+    template_name = 'blog/contact.html'
+
+
+class FaqView(TemplateView):
+    template_name = 'blog/FAQ.html'
 
 
 class BlogView(ListView):
@@ -49,6 +56,7 @@ class CreatePostView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
     permission_required = "blog.add_post"
+    permission_denied_message = "You do not have the required permissions!"
 
     form_class = PostForm
     model = Post
@@ -58,9 +66,7 @@ class PostUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
     permission_required = "blog.change_post"
-
     permission_denied_message = "You do not have the required permissions!"
-    raise_exception = False  # Raise 403 error instead of redirecting
 
     form_class = PostForm
     model = Post
@@ -70,6 +76,7 @@ class PostDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('post_list')
     permission_required = "blog.delete_post"
+    permission_denied_message = "You do not have the required permissions!"
 
 
 class DraftListView(LoginRequiredMixin, ListView):

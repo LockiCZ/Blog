@@ -1,0 +1,18 @@
+{
+    "header": "Často kladené otázky",
+    "new_question_btn": "Položit novou otázku",
+    "questions": [
+        {
+            "question": "Jaký je účel této webové stránky?",
+            "answer": "Tato webová stránka je platformou pro komunitu, kde mohou klást otázky a dostávat odpovědi od ostatních členů komunity. Je to místo pro sdílení znalostí a učení se od ostatních."
+        },
+        {
+            "question": "Jak mohu položit otázku?",
+            "answer": "Chcete-li položit otázku, klikněte na tlačítko 'Položit novou otázku' a vyplňte formulář. Jakmile odešlete svou otázku, bude zkontrolována komunitou a zveřejněna na webové stránce."
+        },
+        {
+            "question": "Jak mohu odpovědět na otázku?",
+            "answer": "Chcete-li odpovědět na otázku, klikněte na tlačítko 'Odpovědět' pod otázkou a vyplňte formulář. Jakmile odešlete svou odpověď, bude zkontrolována komunitou a zveřejněna na webové stránce."
+        }
+    ]
+}

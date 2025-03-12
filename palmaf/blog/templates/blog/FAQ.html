@@ -4,20 +4,36 @@
 
 <section class="container p-5 text-center text-sm-start align-items-center justify-content-between light-bg ">
     <div>
-        <h1>{{ request.locals.lead.header }}</h1>
+        <h1>{{ request.locals.header }}</h1>
         
         <p class="lead my-4">
             {{ request.locals.lead.text }}
         </p>
-        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#contact-form">
-            {{ request.locals.lead.button }}
+
+        <div class="accordion accordion-flush" id="questions">
+            {% for question in request.locals.questions %}
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#question-{{ forloop.counter }}">
+                        {{ question.question }}
+                    </button>
+                </h2>
+                <div id="question-{{ forloop.counter }}" class="accordion-collapse collapse" data-bs-parent="#questions">
+                    <div class="accordion-body">
+                        {{ question.answer }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <button class="btn btn-primary btn-lg mt-4" data-bs-toggle="modal" data-bs-target="#contact-form">
+            {{ request.locals.new_question_btn }}
         </button>
     </div>
 </section>
 
-<section class="container my-4 ultra-light-bg pt-1">
-    {% include 'blog/post_list.html' %}
-</section>
 
 <div class="modal fade" id="contact-form" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true">
     <div class="modal-dialog">
