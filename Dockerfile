@@ -26,10 +26,10 @@ COPY requirements.txt  /app/
 RUN pip install --no-cache-dir -r /app/requirements.txt
  
 # Copy the Django project to the container
-COPY /palmaf /app/palmaf/
+COPY /src /app/src/
  
 # Expose the Django port
 EXPOSE 8000
 
 # Run the Django server
-CMD ["uvicorn", "my_site.asgi:application", "--host", "0.0.0.0"]
+CMD ["uvicorn", "blog_site.asgi:application", "--host", "0.0.0.0"]

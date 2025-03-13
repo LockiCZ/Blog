@@ -1,9 +1,9 @@
 __pycache__/
 
-palmaf/staticfiles/
+src/staticfiles/
 
 data/db/
 
-html_tepmlates/
+html_templates/
 
-palmaf/my_site/local.py
+.env
