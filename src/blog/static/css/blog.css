@@ -819,3 +819,7 @@ textarea.form-control {
   box-shadow: var(--shadow-md);
   transition: all var(--transition-medium);
 }
+
+.grecaptcha-badge {
+  display: none;
+}

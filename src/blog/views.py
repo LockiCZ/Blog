@@ -68,7 +68,7 @@ class CreateQuoteView(CreateView):
         return redirect(self.get_success_url())
 
     def form_valid(self, form):
-        messages.error(self.request, self.request.locals["messages"]["quote_success"])
+        messages.success(self.request, self.request.locals["messages"]["quote_success"])
         return super().form_valid(form)
 
     def get_success_url(self):
