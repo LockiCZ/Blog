@@ -4,6 +4,16 @@
         "text": "We help companies to automate their processes with AI, reducing costs and increasing efficiency. Use AI to do repetitive work and focus on thinks that matters most.",
         "button": "Contact us"
     },
+    "quote_form":{
+        "header": "Get a quote",
+        "msg": "Fill out the form and we will get back to you with a quote.",
+        "submit": "Submit",
+        "Author": "Author",
+        "Email": "Email",
+        "Phone": "Phone",
+        "Company": "Company name",
+        "Quote": "Requirements"
+    },
     "blog_posts": "Blog posts",
     "new_post": "New post",
     "drafts": "Drafts",

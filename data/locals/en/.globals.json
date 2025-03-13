@@ -13,5 +13,9 @@
         "blog": "Blog",
         "faq": "FAQ",
         "contact": "Contact"
+    },
+    "messages": {
+        "quote_success": "Thank you for your interest. We will get back to you soon.",
+        "quote_error": "An error occurred. Please try again later."
     }
 }

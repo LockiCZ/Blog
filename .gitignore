@@ -3,3 +3,7 @@ __pycache__/
 palmaf/staticfiles/
 
 data/db/
+
+html_tepmlates/
+
+palmaf/my_site/local.py

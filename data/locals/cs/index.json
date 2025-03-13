@@ -4,6 +4,16 @@
         "text": "Pomáháme firmám automatizovat jejich procesy s pomocí AI, snižujeme náklady a zvyšujeme efektivitu. Využijte AI k tomu, aby dělala opakující se práci a zaměřte se na to, co je pro vás nejdůležitější.",
         "button": "Kontaktujte nás"
     },
+    "quote_form":{
+        "header": "Získejte nabídku",
+        "msg": "Vyplňte formulář a my se vám ozveme s nabídkou.",
+        "submit": "Odeslat",
+        "Author": "Autor",
+        "Email": "Email",
+        "Phone": "Telefon",
+        "Company": "Název společnosti",
+        "Quote": "Požadavky na nabídku"
+    },
     "blog_posts": "Články",
     "new_post": "Nový článek",
     "drafts": "Koncepty",

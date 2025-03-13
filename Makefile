@@ -1,7 +1,11 @@
+migrate-make:
+	python palmaf/manage.py makemigrations
+
+migrate:
+	python palmaf/manage.py migrate
 
 static:
 	python palmaf/manage.py collectstatic --noinput
-
 
 build: static
 	docker build --no-cache -t palmaf -t 0.1 .

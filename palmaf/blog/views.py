@@ -3,30 +3,36 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import (
-    TemplateView, 
-    ListView, 
-    DetailView, 
-    CreateView, 
-    UpdateView, 
+    TemplateView,
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
     DeleteView
-    )
+)
+from django.urls import reverse
 
-from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .utils import map_field_labels
+from .models import Post, Comment, Quote
+from .forms import PostForm, CommentForm, QuoteForm
 
 from django.urls import reverse_lazy
 from django.utils import timezone
 
+from django.contrib import messages
 
 # Create your views here.
 
 
-class HomeView(ListView):
+class HomeView(TemplateView):
     template_name = 'blog/home.html'
-    model = Post
 
-    def get_queryset(self):
-        return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["post_list"] = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date').all()
+        context["form"] = map_field_labels(QuoteForm(), context["view"].request.locals["quote_form"])
+        return context
+
 
 class ServicesView(TemplateView):
     template_name = 'blog/services.html'
@@ -52,6 +58,23 @@ class PostDetailView(DetailView):
     model = Post
 
 
+class CreateQuoteView(CreateView):
+    form_class = QuoteForm
+    model = Quote
+    template_name = "404.html"  # this view is only for post that returns redirect
+
+    def form_invalid(self, form):
+        messages.error(self.request, self.request.locals["messages"]["quote_error"])
+        return redirect(self.get_success_url())
+
+    def form_valid(self, form):
+        messages.error(self.request, self.request.locals["messages"]["quote_success"])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse("home")
+
+
 class CreatePostView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
@@ -60,7 +83,7 @@ class CreatePostView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
     form_class = PostForm
     model = Post
-    
+
 
 class PostUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     login_url = '/login/'
@@ -86,7 +109,7 @@ class DraftListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Post.objects.filter(published_date__isnull=True).order_by('created_date')
-    
+
 
 #########################################################
 #########################################################

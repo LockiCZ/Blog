@@ -22,42 +22,41 @@
 <div class="modal fade" id="contact-form" tabindex="-1" aria-labelledby="enrollLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <form method="POST" class="post-form" action="{% url 'quote_new' %}">
             <div class="modal-header">
-                <h5 class="modal-title" id="enrollLabel">Enrollment</h5>
+                <h5 class="modal-title" id="enrollLabel">{{ request.locals.quote_form.header }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p class="lead">Fill out this form and we will get back to you</p>
-                <form>
+                <p class="lead">{{ request.locals.quote_form.msg }}</p>
                     {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="first-name" class="col-form-label">Full Name:</label>
-                        <input type="text" class="form-control" id="first-name" />
+                    {% for field in form %}
+                    {% if forloop.last %}
+                        {% if form.recaptcha.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.recaptcha.errors }}
+                        </div>
+                        {% endif %}
+                    <div class="mb-3 d-none">
+                        {{ form.recaptcha }}
                     </div>
+                    {% else %}
                     <div class="mb-3">
-                        <label for="email" class="col-form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" />
+                        <label for="{{ field.id_for_label }}"  class="col-form-label">{{ field.label }}</label>
+                        {{ field }}
+                        {{ field.errors }}
                     </div>
-                    <div class="mb-3">
-                        <label for="phone" class="col-form-label">Phone:</label>
-                        <input type="tel" class="form-control" id="phone" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="col-form-label">Company name:</label>
-                        <input type="tel" class="form-control" id="phone" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="col-form-label">What do you expect from us to do:</label>
-                        <input type="tel" class="form-control" id="phone" />
-                    </div>
-                </form>
+                    {% endif %}
+
+                    {% endfor %}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     Close
                 </button>
-                <button type="button" class="btn btn-primary">Submit</button>
+                <input type="submit" class="btn btn-primary" value="Submit"></input>
             </div>
+            </form>
         </div>
     </div>
 </div>

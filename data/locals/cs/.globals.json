@@ -13,5 +13,9 @@
         "blog": "Blog",
         "faq": "FAQ",
         "contact": "Kontakt"
+    },
+    "messages": {
+        "quote_success": "Děkujeme za váš zájem. Brzy se vám ozveme.",
+        "quote_error": "Došlo k chybě. Zkuste to prosím později."
     }
 }
