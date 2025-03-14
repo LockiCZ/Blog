@@ -12,7 +12,7 @@ def load_language(lang, dir_name):
                 with open(file_path, "r", encoding="utf-8") as f:
                     lang_data = json.load(f)
                     lang_data["lang"] = lang
-                    
+
                     if file_name == ".globals.json":
                         globals = lang_data
                         out["."] = globals
@@ -45,8 +45,8 @@ def load_translations():
 def get_lang_id(request):
     if request.COOKIES.get("lang"):
         return request.COOKIES.get("lang")
-    
+
     if "HTTP_ACCEPT_LANGUAGE" in request.META:
         return request.META["HTTP_ACCEPT_LANGUAGE"][:2]
-    
+
     return "en"

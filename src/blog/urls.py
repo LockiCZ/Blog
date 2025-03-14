@@ -1,4 +1,7 @@
 from django.urls import path
+
+from django.contrib.auth import views as auth_views
+
 from . import views
 
 urlpatterns = [
@@ -26,4 +29,12 @@ urlpatterns = [
     path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
 
+    path('user/login/', views.LoginView.as_view(), name='login'),
+    path('user/logout/', views.LogoutView.as_view(), name='logout'),
+    path('user/password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('user/password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('user/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('user/reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('user/password_change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
+    path('user/password_change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
 ]

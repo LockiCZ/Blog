@@ -16,6 +16,7 @@
     },
     "messages": {
         "quote_success": "Děkujeme za váš zájem. Brzy se vám ozveme.",
-        "quote_error": "Došlo k chybě. Zkuste to prosím později."
+        "quote_error": "Došlo k chybě. Zkuste to prosím později.",
+        "logout_success": "Byli jste úspěšně odhlášeni."
     }
 }

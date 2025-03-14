@@ -12,16 +12,19 @@ from django.views.generic import (
 )
 from django.urls import reverse
 
-from .utils import map_field_labels
-from .models import Post, Comment, Quote
-from .forms import PostForm, CommentForm, QuoteForm
+from ..utils import map_field_labels
+from ..models import Post, Comment, Quote
+from ..forms import PostForm, CommentForm, QuoteForm
 
 from django.urls import reverse_lazy
 from django.utils import timezone
 
 from django.contrib import messages
 
+
 # Create your views here.
+
+LOGIN_ULR = "/user/login/"
 
 
 class HomeView(TemplateView):
@@ -76,7 +79,7 @@ class CreateQuoteView(CreateView):
 
 
 class CreatePostView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-    login_url = '/login/'
+    login_url = LOGIN_ULR
     redirect_field_name = 'blog/post_detail.html'
     permission_required = "blog.add_post"
     permission_denied_message = "You do not have the required permissions!"
@@ -86,7 +89,7 @@ class CreatePostView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
 
 class PostUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-    login_url = '/login/'
+    login_url = LOGIN_ULR
     redirect_field_name = 'blog/post_detail.html'
     permission_required = "blog.change_post"
     permission_denied_message = "You do not have the required permissions!"
@@ -103,7 +106,7 @@ class PostDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
 
 class DraftListView(LoginRequiredMixin, ListView):
-    login_url = '/login/'
+    login_url = LOGIN_ULR
     redirect_field_name = 'blog/post_list.html'
     model = Post
 

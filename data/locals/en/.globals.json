@@ -16,6 +16,7 @@
     },
     "messages": {
         "quote_success": "Thank you for your interest. We will get back to you soon.",
-        "quote_error": "An error occurred. Please try again later."
+        "quote_error": "An error occurred. Please try again later.",
+        "logout_success": "You have been logged out successfully."
     }
 }

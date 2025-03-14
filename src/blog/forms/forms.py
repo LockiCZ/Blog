@@ -1,7 +1,7 @@
 from django import forms
 from django_recaptcha.fields import ReCaptchaField
 from django_recaptcha.widgets import ReCaptchaV3
-from .models import Post, Comment, Quote
+from ..models import Post, Comment, Quote
 
 
 class PostForm(forms.ModelForm):

@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
+{% block title %}Home{% endblock %}
+
 {% block content %}
 
 <section class="container p-5 text-center text-sm-start align-items-center justify-content-between light-bg ">
     <div>
-        <h1>{{ request.locals.lead.header }}</h1>
+        <h1>{{ locals.lead.header }}</h1>
         
         <p class="lead my-4">
-            {{ request.locals.lead.text }}
+            {{ locals.lead.text }}
         </p>
         <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#contact-form">
-            {{ request.locals.lead.button }}
+            {{ locals.lead.button }}
         </button>
     </div>
 </section>
@@ -24,11 +26,11 @@
         <div class="modal-content">
             <form method="POST" class="post-form" action="{% url 'quote_new' %}">
             <div class="modal-header">
-                <h5 class="modal-title" id="enrollLabel">{{ request.locals.quote_form.header }}</h5>
+                <h5 class="modal-title" id="enrollLabel">{{ locals.quote_form.header }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p class="lead">{{ request.locals.quote_form.msg }}</p>
+                <p class="lead">{{ locals.quote_form.msg }}</p>
                     {% csrf_token %}
                     {% for field in form %}
                     {% if forloop.last %}

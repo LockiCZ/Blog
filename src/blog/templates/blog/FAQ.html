@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 
+{% block title %}FAQ{% endblock %}
+
 {% block content %}
 
 <section class="container p-5 text-center text-sm-start align-items-center justify-content-between light-bg ">
     <div>
-        <h1>{{ request.locals.header }}</h1>
+        <h1>{{ locals.header }}</h1>
         
         <p class="lead my-4">
-            {{ request.locals.lead.text }}
+            {{ locals.lead.text }}
         </p>
 
         <div class="accordion accordion-flush" id="questions">
-            {% for question in request.locals.questions %}
+            {% for question in locals.questions %}
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -29,7 +31,7 @@
         </div>
 
         <button class="btn btn-primary btn-lg mt-4" data-bs-toggle="modal" data-bs-target="#contact-form">
-            {{ request.locals.new_question_btn }}
+            {{ locals.new_question_btn }}
         </button>
     </div>
 </section>
