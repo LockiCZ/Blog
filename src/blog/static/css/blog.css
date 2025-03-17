@@ -521,7 +521,7 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
 
 /* Modern Footer with Gradient and Wave */
 .footer {
-  background: linear-gradient(135deg, var(--dark), #2d3748);
+  background: linear-gradient(135deg, #131f35, #2d3748);
   color: white;
   padding: 5rem 0 2rem;
   margin-top: 5rem;
@@ -822,4 +822,14 @@ textarea.form-control {
 
 .grecaptcha-badge {
   display: none;
+}
+
+.form-label {
+  color: rgb(117, 117, 117);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

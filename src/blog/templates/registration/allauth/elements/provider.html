@@ -1,6 +1,6 @@
 {% load allauth %}
-<li class="list-group-item">
-    <a class="d-block w-100 link-dark link-underline link-underline-opacity-0"
-       title="{{ attrs.name }}"
-       href="{{ attrs.href }}">{{ attrs.name }}</a>
-</li>
+{% load i18n %}
+<a class="btn btn-secondary text-uppercase w-75"
+    title="{{ attrs.name }}"
+    href="{{ attrs.href }}">{% if attrs.name == "Google"%}<i class="fab fa-google fa-lg mx-3"></i> {% endif %}{% translate "Sign in with" %} {{ attrs.name }}</a>
+

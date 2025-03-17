@@ -1,0 +1,13 @@
+{% load i18n %}
+{% load allauth %}
+{% load socialaccount %}
+{% get_providers as socialaccount_providers %}
+{% if socialaccount_providers %}
+    {% if not SOCIALACCOUNT_ONLY %}
+        <div class="text-center mt-4 border-top">
+            <div class="light-bg" style="display: inline-block; position: relative; top: -15px; padding: 0px 15px; font-size: medium;box-shadow: none;">{% translate "OR" %}</div>
+        </div>
+    {% endif %}
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+    {% include "socialaccount/snippets/login_extra.html" %}
+{% endif %} 

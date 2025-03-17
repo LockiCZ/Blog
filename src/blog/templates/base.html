@@ -89,8 +89,10 @@
             </header>
         {% endif %}
         
-        {% block content %}
-        {# Anything outside of this will be inherited if you use extend.#}
+        {% block body %}
+            {% block content %}
+            {# Anything outside of this will be inherited if you use extend.#}
+            {% endblock %}
         {% endblock %}
     </div>
 
