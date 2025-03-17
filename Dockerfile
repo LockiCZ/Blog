@@ -18,6 +18,8 @@ ENV PYTHONUNBUFFERED=1
  
 # Upgrade pip
 RUN pip install --upgrade pip 
+
+RUN apt-get install gettext
  
 # Copy the Django project  and install dependencies
 COPY requirements.txt  /app/
@@ -27,6 +29,10 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
  
 # Copy the Django project to the container
 COPY /src /app/src/
+
+# Make migrations
+RUN python manage.py makemigrations
+RUN python manage.py migrate
  
 # Expose the Django port
 EXPOSE 8000

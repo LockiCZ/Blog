@@ -58,6 +58,7 @@ class BlogView(ListView):
 
 
 class PostDetailView(DetailView):
+    template_name = 'blog/post_detail.html'
     model = Post
 
 

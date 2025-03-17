@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Macondo&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   </head>
   <body>
 
@@ -46,11 +47,11 @@
                 <ul class="nav navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-danger auth-btn" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                            <a class="nav-link btn btn-outline-danger auth-btn" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-primary auth-btn" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Log In</a>
+                            <a class="nav-link btn btn-outline-primary auth-btn" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i> Log In</a>
                         </li>
                     {% endif %}
                     <div class="dropdown">

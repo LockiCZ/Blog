@@ -6,7 +6,8 @@
         "SC_401": "Unauthorized",
         "SC_403": "Permission required",
         "SC_404": "Not found",
-        "SC_500": "Internal server error"
+        "SC_500": "Internal server error",
+        "SC_429": "Too many requests"
     },
     "nav": {
         "services": "Services",
