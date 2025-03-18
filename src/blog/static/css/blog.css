@@ -238,7 +238,6 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
   font-weight: 600;
   padding: 0.7rem 1.2rem !important;
   margin: 0 0.15rem;
-  border-radius: var(--border-radius-lg);
   transition: all var(--transition-medium);
   position: relative;
   z-index: 1;
@@ -256,6 +255,12 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
   opacity: 0;
   z-index: -1;
   transition: opacity var(--transition-medium);
+}
+
+.nav-link.active {
+  opacity: 1;
+  border-radius: var(--border-radius-lg);
+  color: white !important;
 }
 
 .nav-link:hover {
@@ -832,4 +837,8 @@ textarea.form-control {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.no-transform:before .no-transform:hover .no-transform {
+  transform: none;
 }
