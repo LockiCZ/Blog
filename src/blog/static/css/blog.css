@@ -839,6 +839,10 @@ textarea.form-control {
   align-items: center;
 }
 
+.form-text {
+  color: var(--medium);
+}
+
 .no-transform:before .no-transform:hover .no-transform {
   transform: none;
 }

@@ -115,6 +115,10 @@ class DraftListView(LoginRequiredMixin, ListView):
         return Post.objects.filter(published_date__isnull=True).order_by('created_date')
 
 
+class UserProfileView(TemplateView):
+    template_name = 'blog/user_profile.html'
+
+
 #########################################################
 #########################################################
 
