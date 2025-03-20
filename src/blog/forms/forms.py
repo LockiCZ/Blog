@@ -2,16 +2,23 @@ from django import forms
 from django_recaptcha.fields import ReCaptchaField
 from django_recaptcha.widgets import ReCaptchaV3
 from ..models import Post, Comment, Quote
+from martor.widgets import AdminMartorWidget
 
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('author', 'title', 'text',)
+        fields = ('author', 'title', 'version', 'lang', 'thumbnail', 'thumbnail_caption', 'content', 'published')
 
         widgets = {
+            'author': forms.TextInput(attrs={'class': 'textinputclass'}),
             'title': forms.TextInput(attrs={'class': 'textinputclass'}),
-            'text': forms.Textarea(attrs={'class': 'editable tinymce-editor'}),
+            'version': forms.TextInput(attrs={'class': 'textinputclass'}),
+            'lang': forms.TextInput(attrs={'class': 'textinputclass'}),
+            'thumbnail': forms.FileInput(attrs={'class': 'textinputclass'}),
+            'thumbnail_caption': forms.FileInput(attrs={'class': 'textinputclass'}),
+            'content': AdminMartorWidget(),
+            'published': forms.CheckboxInput(),
         }
 
 

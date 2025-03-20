@@ -3,3 +3,5 @@ uvicorn
 whitenoise
 django-recaptcha
 django-allauth[mfa,socialaccount]>=65.5.0
+martor
+Pillow

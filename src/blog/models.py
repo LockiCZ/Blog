@@ -1,20 +1,30 @@
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 
-# Create your models here.
+from martor.models import MartorField
 
 
 class Post(models.Model):
-    author = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(blank=True, null=True)
+    author = models.ForeignKey('users.User', on_delete=models.RESTRICT, related_name="post_author")
 
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
+    title = models.CharField(max_length=200)
+    version = models.CharField(max_length=20)
+    lang = models.CharField(max_length=2)
+
+    thumbnail = models.ImageField(upload_to='thumbnails/', blank=True, null=True)
+    thumbnail_caption = MartorField()
+
+    content = MartorField()
+
+    last_update_by = models.ForeignKey('users.User', on_delete=models.RESTRICT, related_name="post_update_by")
+    last_update_date = models.DateTimeField(default=timezone.now)
+
+    created_date = models.DateTimeField(default=timezone.now)
+    publish_date = models.DateTimeField(blank=True, null=True)
+
+    published = models.BooleanField(default=False)
 
     def approve_comments(self):
         return self.comments.filter(approved_comment=True)
@@ -28,7 +38,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(
-        'blog.Post', related_name='comments', on_delete=models.CASCADE)
+        'blog.Post', related_name='comments', on_delete=models.RESTRICT)
     author = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)

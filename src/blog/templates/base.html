@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html>
   <head>
     <meta charset="utf-8">
@@ -47,11 +48,11 @@
                 <ul class="nav navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-danger auth-btn" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                            <a class="nav-link" href="{% url 'user_profile' %}"><i class="fa-regular fa-user"></i><emp class="d-lg-none"> {% translate 'User Profile' %}</emp></a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-primary auth-btn" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i> Log In</a>
+                            <a class="nav-link btn btn-outline-primary auth-btn" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i> {% translate 'Log In' %}</a>
                         </li>
                     {% endif %}
                     <div class="dropdown">

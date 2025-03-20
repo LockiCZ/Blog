@@ -3,6 +3,7 @@ __pycache__/
 src/staticfiles/
 
 data/db/
+data/media/
 
 html_templates/
 

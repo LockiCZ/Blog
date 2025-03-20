@@ -32,7 +32,7 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["post_list"] = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date').all()
+        context["post_list"] = Post.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date').all()
         context["form"] = map_field_labels(QuoteForm(), context["view"].request.locals["quote_form"])
         return context
 
@@ -54,7 +54,7 @@ class BlogView(ListView):
     template_name = 'blog/blog.html'
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+        return Post.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date')
 
 
 class PostDetailView(DetailView):
@@ -112,10 +112,10 @@ class DraftListView(LoginRequiredMixin, ListView):
     model = Post
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__isnull=True).order_by('created_date')
+        return Post.objects.filter(publish_date__isnull=True).order_by('created_date')
 
 
-class UserProfileView(TemplateView):
+class UserProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'blog/user_profile.html'
 
 

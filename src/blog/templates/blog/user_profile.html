@@ -1,0 +1,24 @@
+{% extends "account/base_manage.html" %}
+{% load allauth i18n %}
+{% block nav_class_profile %}{{ block.super }} active{% endblock %}
+{% block head_title %}
+    {% trans "Profile" %}
+{% endblock head_title %}
+{% block content %}
+    {% element h1 %}
+        {% trans "Profile" %}
+    {% endelement %}
+
+    <p><strong>{% translate 'User Name' %}:</strong> {{ user.username }}</p>
+    <p><strong>{% translate 'Email' %}:</strong> {{ user.email }}</p>
+    <p><strong>{% translate 'First Name' %}:</strong> {{ user.first_name }}</p>
+    <p><strong>{% translate 'Last Name' %}:</strong> {{ user.last_name }}</p>
+    <p><strong>{% translate 'User is active' %}:</strong> {{ user.is_active }}</p>
+    {% if user.is_superuser %}
+    <p><strong>{% translate 'User is superuser' %}:</strong> {% translate 'True' %}</p>
+    {% endif %}
+    <p><strong>{% translate 'Date joined' %}:</strong> {{ user.date_joined }}</p>
+    <p><strong>{% translate 'Last login' %}:</strong> {{ user.last_login }}</p>
+    <p><strong>{% translate 'Groups' %}:</strong> {% for group in user.groups.all %}{{ group }}{% if not forloop.last %}, {% endif %}{% empty %}{% translate 'No group assigned' %}{% endfor %}</p>
+    
+{% endblock content %}

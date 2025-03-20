@@ -1,3 +1,4 @@
+{% load martortags %}
 {% block post_list %}
 
     <div class="container my-4">
@@ -6,8 +7,8 @@
         {% if user.is_authenticated %}
         <div class="row">
             <div class="col-md-6 mb-4">
-                <button class="btn btn-secondary mx-3" href="{% url 'post_new' %}"><i class="fas fa-plus-circle"></i> {{ locals.new_post }}</a>
-                <button class="btn btn-secondary mx-3" href="{% url 'post_draft_list' %}"><i class="fas fa-file-alt"></i> {{ locals.drafts }}</a>    
+                <a class="btn btn-secondary mx-3" href="{% url 'post_new' %}"><i class="fas fa-plus-circle"></i> {{ locals.new_post }}</a>
+                <a class="btn btn-secondary mx-3" href="{% url 'post_draft_list' %}"><i class="fas fa-file-alt"></i> {{ locals.drafts }}</a>    
             </div>
         </div>
         {% endif %}
@@ -20,11 +21,11 @@
                             <h3 class="card-title">{{ post.title }}</h3>
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <div class="text-muted">
-                                    <i class="fas fa-calendar-alt me-1"></i> {{ post.published_date|date:"F d, Y" }}
+                                    <i class="fas fa-calendar-alt me-1"></i> {{ post.publish_date|date:"F d, Y" }}
                                 </div>
                             </div>
                             <div class="card-text post-preview-content">
-                                {{ post.text|safe|truncatewords_html:30 }}
+                                {{ post.thumbnail_caption|safe_markdown }}
                             </div>
                         </div>
                         <div class="card-footer bg-transparent border-0">

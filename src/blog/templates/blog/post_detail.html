@@ -7,9 +7,9 @@
         <h1 class="h1">{{ post.title }}</h1>
         
         <div class="d-flex justify-content-between align-items-center mb-3">
-            {% if post.published_date %}
+            {% if post.publish_date %}
                 <div class="text-muted">
-                    <i class="fas fa-calendar-alt me-1"></i> Published: {{ post.published_date|date:"F d, Y" }}
+                    <i class="fas fa-calendar-alt me-1"></i> Published: {{ post.publish_date|date:"F d, Y" }}
                 </div>
             {% else %}
                 <span class="badge bg-warning text-dark"><i class="fas fa-pencil-alt me-1"></i> Draft</span>
