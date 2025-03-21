@@ -49,7 +49,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --dark: #F9FAFB;
-    --medium: #D1D5DB;
+    --medium: #9ea1a7;
     --light: #1F2937;
     --ultra-light: #111827;
     
@@ -233,7 +233,7 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
   border-radius: 4px;
 }
 
-.nav-link {
+.top-nav-link {
   color: var(--dark) !important;
   font-weight: 600;
   padding: 0.7rem 1.2rem !important;
@@ -243,7 +243,7 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
   z-index: 1;
 }
 
-.nav-link::before {
+.top-nav-link::before {
   content: "";
   position: absolute;
   top: 0;
@@ -257,18 +257,18 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
   transition: opacity var(--transition-medium);
 }
 
-.nav-link.active {
+.top-nav-link.active {
   opacity: 1;
   border-radius: var(--border-radius-lg);
   color: white !important;
 }
 
-.nav-link:hover {
+.top-nav-link:hover {
   color: white !important;
   transform: translateY(-2px);
 }
 
-.nav-link:hover::before {
+.top-nav-link:hover::before {
   opacity: 1;
 }
 
@@ -425,6 +425,7 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
   color: var(--dark);
   line-height: 1.9;
   font-size: 1.1rem;
+  text-align: justify;
 }
 
 .post-content p {
@@ -432,16 +433,11 @@ a:not(.btn):not(.nav-link):not(.card-title a):hover:after {
 }
 
 .post-content img {
-  max-width: 100%;
+  width: 100%;
   height: auto;
   border-radius: var(--border-radius-md);
   margin: 1.5rem 0;
   box-shadow: var(--shadow-md);
-  transition: transform var(--transition-medium);
-}
-
-.post-content img:hover {
-  transform: scale(1.02);
 }
 
 .post-content blockquote {
@@ -845,4 +841,8 @@ textarea.form-control {
 
 .no-transform:before .no-transform:hover .no-transform {
   transform: none;
+}
+
+.text-muted {
+  color:  var(--medium) !important;
 }

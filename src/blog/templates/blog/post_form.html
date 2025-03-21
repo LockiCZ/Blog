@@ -3,30 +3,25 @@
 
 {% block content %}
 
+<div class="container p-5 text-center text-sm-start align-items-center justify-content-between light-bg ">
+
 <h1>New Post</h1>
+
 <form method="POST" class="post-form">
     {% csrf_token %}
     
+
     {% for field in form %}
-    <div class="form-group">
-        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    <div class="mb-3">
+        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
         {{ field }}
         {{ field.errors }}
     </div>
     {% endfor %}
 
+    {{ form.media }} {# Loads rich text editor js files #}
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
-<script>
-    CKEDITOR.replace('id_text', {
-        height: 400,
-        toolbar: [
-            ['Bold', 'Italic', 'Underline', 'Strike', 'NumberedList', 'BulletedList', 'Link', 'Unlink', 'Image', 'Table'],
-            ['Format', 'FontSize'],
-            ['Source']
-        ]
-    });
-</script>
-
+</div>
 {% endblock %}

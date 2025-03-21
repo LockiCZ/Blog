@@ -1,7 +1,7 @@
-import time
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,8 +46,11 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",  # TODO add this only if it is not a production
+
     'translate_mw.middleware.TranslationMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -80,6 +83,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blog_site.wsgi.application'
 
+LANGUAGE_COOKIE_NAME = "lang"
+LANGUAGES = [
+    ("en", _("English")),
+    ("cs", _("Czech")),
+]
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

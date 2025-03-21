@@ -1,30 +1,12 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required, permission_required
-
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import (
     TemplateView,
     ListView,
-    DetailView,
-    CreateView,
-    UpdateView,
-    DeleteView
 )
-from django.urls import reverse
-
 from ..utils import map_field_labels
-from ..models import Post, Comment, Quote
-from ..forms import PostForm, CommentForm, QuoteForm
+from ..models import Post
+from ..forms import QuoteForm
 
-from django.urls import reverse_lazy
 from django.utils import timezone
-
-from django.contrib import messages
-
-
-# Create your views here.
-
-LOGIN_ULR = "/user/login/"
 
 
 class HomeView(TemplateView):
@@ -55,104 +37,3 @@ class BlogView(ListView):
 
     def get_queryset(self):
         return Post.objects.filter(publish_date__lte=timezone.now()).order_by('-publish_date')
-
-
-class PostDetailView(DetailView):
-    template_name = 'blog/post_detail.html'
-    model = Post
-
-
-class CreateQuoteView(CreateView):
-    form_class = QuoteForm
-    model = Quote
-    template_name = "404.html"  # this view is only for post that returns redirect
-
-    def form_invalid(self, form):
-        messages.error(self.request, self.request.locals["messages"]["quote_error"])
-        return redirect(self.get_success_url())
-
-    def form_valid(self, form):
-        messages.success(self.request, self.request.locals["messages"]["quote_success"])
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse("home")
-
-
-class CreatePostView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-    login_url = LOGIN_ULR
-    redirect_field_name = 'blog/post_detail.html'
-    permission_required = "blog.add_post"
-    permission_denied_message = "You do not have the required permissions!"
-
-    form_class = PostForm
-    model = Post
-
-
-class PostUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-    login_url = LOGIN_ULR
-    redirect_field_name = 'blog/post_detail.html'
-    permission_required = "blog.change_post"
-    permission_denied_message = "You do not have the required permissions!"
-
-    form_class = PostForm
-    model = Post
-
-
-class PostDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
-    model = Post
-    success_url = reverse_lazy('post_list')
-    permission_required = "blog.delete_post"
-    permission_denied_message = "You do not have the required permissions!"
-
-
-class DraftListView(LoginRequiredMixin, ListView):
-    login_url = LOGIN_ULR
-    redirect_field_name = 'blog/post_list.html'
-    model = Post
-
-    def get_queryset(self):
-        return Post.objects.filter(publish_date__isnull=True).order_by('created_date')
-
-
-class UserProfileView(LoginRequiredMixin, TemplateView):
-    template_name = 'blog/user_profile.html'
-
-
-#########################################################
-#########################################################
-
-@login_required
-def add_comment_to_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.save()
-            return redirect('post_detail', pk=post.pk)
-    else:
-        form = CommentForm()
-    return render(request, 'blog/comment_form.html', {'form': form})
-
-
-@login_required
-def comment_approve(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    comment.approve()
-    return redirect('post_detail', pk=comment.post.pk)
-
-
-def comment_remove(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    post_pk = comment.post.pk
-    comment.delete()
-    return redirect('post_detail', pk=post_pk)
-
-
-@login_required
-def post_publish(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    post.publish()
-    return redirect('post_detail', pk=pk)

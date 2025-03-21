@@ -8,7 +8,6 @@
         <div class="row">
             <div class="col-md-6 mb-4">
                 <a class="btn btn-secondary mx-3" href="{% url 'post_new' %}"><i class="fas fa-plus-circle"></i> {{ locals.new_post }}</a>
-                <a class="btn btn-secondary mx-3" href="{% url 'post_draft_list' %}"><i class="fas fa-file-alt"></i> {{ locals.drafts }}</a>    
             </div>
         </div>
         {% endif %}
@@ -29,7 +28,7 @@
                             </div>
                         </div>
                         <div class="card-footer bg-transparent border-0">
-                            <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-primary">
+                            <a href="{% url 'post_detail' post_name=post.url_name %}" class="btn btn-primary">
                                 <i class="fas fa-book-open me-1"></i> {{ locals.read_more }}
                             </a>
                         </div>

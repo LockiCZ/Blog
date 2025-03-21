@@ -25,6 +25,14 @@ docker-start:
 docker-stop:
 	docker-compose down
 
-# requires lang=xx
-mkmsg:
-	django-admin makemessages -l $(lang)
+
+locate:
+	django-admin makemessages -l cs  # For Czech
+	django-admin makemessages -l en  # For English
+
+locate-build:
+	django-admin compilemessages
+
+
+
+

@@ -1,7 +1,13 @@
 from django.contrib.auth import views as auth_views
 from django.contrib import messages
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from ..forms import LoginForm
+
+
+class UserProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'blog/user_profile.html'
 
 
 class LoginView(auth_views.LoginView):

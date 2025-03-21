@@ -10,8 +10,9 @@ class Post(models.Model):
     author = models.ForeignKey('users.User', on_delete=models.RESTRICT, related_name="post_author")
 
     title = models.CharField(max_length=200)
+    url_name = models.CharField(max_length=50, db_index=True)
     version = models.CharField(max_length=20)
-    lang = models.CharField(max_length=2)
+    lang = models.CharField(max_length=2, db_index=True, choices=settings.LANGUAGES)
 
     thumbnail = models.ImageField(upload_to='thumbnails/', blank=True, null=True)
     thumbnail_caption = MartorField()
@@ -22,7 +23,7 @@ class Post(models.Model):
     last_update_date = models.DateTimeField(default=timezone.now)
 
     created_date = models.DateTimeField(default=timezone.now)
-    publish_date = models.DateTimeField(blank=True, null=True)
+    publish_date = models.DateTimeField(blank=True, null=True, db_index=True)
 
     published = models.BooleanField(default=False)
 

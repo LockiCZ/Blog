@@ -32,38 +32,42 @@
 
                 <ul class="nav navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'services' %}">{{ locals.nav.services }}</a>
+                        <a class="nav-link top-nav-link" href="{% url 'services' %}">{{ locals.nav.services }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'blog' %}">{{ locals.nav.blog }}</a>
+                        <a class="nav-link top-nav-link" href="{% url 'blog' %}">{{ locals.nav.blog }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'FAQ' %}">{{ locals.nav.faq }}</a>
+                        <a class="nav-link top-nav-link" href="{% url 'FAQ' %}">{{ locals.nav.faq }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">{{ locals.nav.contact }}</a>
+                        <a class="nav-link top-nav-link" href="{% url 'contact' %}">{{ locals.nav.contact }}</a>
                     </li>
                 </ul>
 
                 <ul class="nav navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'user_profile' %}"><i class="fa-regular fa-user"></i><emp class="d-lg-none"> {% translate 'User Profile' %}</emp></a>
+                            <a class="nav-link top-nav-link" href="{% url 'user_profile' %}"><i class="fa-regular fa-user"></i><emp class="d-lg-none"> {% translate 'User Profile' %}</emp></a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-primary auth-btn" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i> {% translate 'Log In' %}</a>
+                            <a class="nav-link top-nav-link btn btn-outline-primary auth-btn" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i> {% translate 'Log In' %}</a>
                         </li>
                     {% endif %}
+             
                     <div class="dropdown">
-                        <button class="nav-link dropdown-toggle mt-2" type="button" data-bs-toggle="dropdown"
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_current_language as LANGUAGE_CODE %}
+                        <button class="nav-link top-nav-link dropdown-toggle mt-2" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false"
                             style="font-size: x-small;">
-                            {{ locals.lang | upper }}
+                            {{ LANGUAGE_CODE | upper }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 0px;">
-                            <button class="dropdown-item" onclick="changeLang('en')">EN</button>
-                            <button class="dropdown-item" onclick="changeLang('cs')">CS</button>
+                            {% for lang in LANGUAGES %}
+                                <button class="dropdown-item" onclick="changeLang('{{ lang.0 }}')">{{ lang.0 | upper }}</button>
+                            {% endfor %}
                         </div>
                     </div>
                 </ul>
